@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	sdkgenutil "github.com/cosmos/cosmos-sdk/x/genutil"
 
 	stakingtypes "github.com/okex/okexchain/x/staking/types"
 
@@ -23,7 +24,7 @@ func NewGenesisState(genTxs []json.RawMessage) GenesisState {
 }
 
 // ValidateGenesis validates GenTx transactions
-func ValidateGenesis(genesisState GenesisState) error {
+func ValidateGenesis(genesisState sdkgenutil.GenesisState) error {
 	for i, genTx := range genesisState.GenTxs {
 		var tx authtypes.StdTx
 		if err := ModuleCdc.UnmarshalJSON(genTx, &tx); err != nil {
